@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "secondary-container": "#571bc1",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "outline-variant": "#464554",
+                        "on-primary": "#1000a9",
+                        "primary-fixed": "#e1e0ff",
+                        "on-tertiary-fixed": "#301400",
+                        "on-tertiary": "#4f2500",
+                        "surface-container-highest": "#2d3449",
+                        "tertiary-container": "#d97721",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#d0bcff",
+                        "tertiary": "#ffb783",
+                        "primary": "#c0c1ff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "inverse-surface": "#dae2fd",
+                        "surface": "#0b1326",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#c7c4d7",
+                        "on-secondary-container": "#c4abff",
+                        "outline": "#908fa0",
+                        "surface-tint": "#c0c1ff",
+                        "on-primary-container": "#0d0096",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "on-tertiary-container": "#452000",
+                        "on-secondary-fixed": "#23005c",
+                        "background": "#060e20",
+                        "surface-container": "#171f33",
+                        "on-secondary": "#3c0091",
+                        "tertiary-fixed": "#ffdcc5",
+                        "surface-variant": "#2d3449",
+                        "inverse-primary": "#494bd6",
+                        "surface-container-lowest": "#060e20",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#283044",
+                        "surface-container-low": "#131b2e",
+                        "on-surface": "#dae2fd",
+                        "primary-container": "#8083ff",
+                        "surface-container-high": "#222a3d",
+                        "on-background": "#dae2fd",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-bright": "#31394d",
+                        "on-primary-fixed": "#07006c",
+                        "surface-dim": "#0b1326"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-gap": "12px",
+                        "container-padding-mobile": "16px",
+                        "chat-max-width": "800px",
+                        "base": "8px",
+                        "sidebar-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "code-block": ["JetBrains Mono"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "code-block": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #060e20;
+            color: #dae2fd;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(23, 31, 51, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(144, 143, 160, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex flex-col">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-gutter py-4 w-full z-40 border-b border-outline-variant/20 bg-surface-container-lowest sticky top-0 shadow-sm">
+<div class="flex items-center gap-4">
+<h1 class="font-headline-md text-headline-md font-black text-primary">Deep Intelligence</h1>
+<div class="h-6 w-[1px] bg-outline-variant/30 hidden md:block"></div>
+<span class="font-body-md text-body-md text-on-surface-variant hidden md:block">Research Session</span>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden lg:flex items-center gap-8 font-body-md text-body-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">Share</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">Export</button>
+<button class="text-primary font-bold border-b-2 border-primary pb-1">Clear Chat</button>
+</nav>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors active:scale-98">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/20">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A professional close-up portrait of a user for a technology interface avatar. The individual has a focused, intelligent expression, lit by cool-toned cinematic studio lighting that emphasizes sharp features. The background is a soft, out-of-focus tech environment with deep blue and indigo hues to match the high-performance computing theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_nJrWdorL0JS6oplj3bRQudhfSo2vwt-hoFT6Z7H0WCBsp-si27Ocf0QdLezg5ElVY3GquUpqxkJoSn5jR0DtAlQpGeAhPLatqlNUT36Q9endhA2bCExEWnhrkIbk2qVF06j5CBPFFXodjhH0Udtq3HTm0zsTm46Yw4c1z5zfwrEk9iw9KcX4Cn3TN48DItL50JLOLgIKixY4BRlTYGjYj9pDdezj_-xmcQSC3Dvk0-mWs0ff4HiAG8Adt9pbt-M27mm1fplQjk"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar (Left) -->
+<aside class="w-sidebar-width h-full flex flex-col border-r border-outline-variant/30 bg-surface-container-lowest hidden md:flex">
+<div class="p-4">
+<button class="w-full flex items-center justify-center gap-2 bg-primary-container text-on-primary-container font-bold py-3 px-4 rounded-xl transition-all duration-200 active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>New Chat</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar px-2 space-y-6 py-4">
+<!-- Section: Today -->
+<section>
+<h3 class="px-4 font-label-caps text-label-caps text-on-surface-variant mb-2">Today</h3>
+<div class="space-y-1">
+<div class="flex items-center gap-3 bg-secondary-container/10 text-primary border-l-2 border-primary px-4 py-2 transition-all duration-200 active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-body-md text-body-md truncate">Quantum Simulation Models</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/50 px-4 py-2 transition-all duration-200 active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-body-md text-body-md truncate">Neural Arch Design</span>
+</div>
+</div>
+</section>
+<!-- Section: Yesterday -->
+<section>
+<h3 class="px-4 font-label-caps text-label-caps text-on-surface-variant mb-2">Yesterday</h3>
+<div class="space-y-1">
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/50 px-4 py-2 transition-all duration-200 active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-body-md truncate">Tokenomics Whitepaper</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/50 px-4 py-2 transition-all duration-200 active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-body-md truncate">Vector Database Optimization</span>
+</div>
+</div>
+</section>
+<!-- Section: Earlier -->
+<section>
+<h3 class="px-4 font-label-caps text-label-caps text-on-surface-variant mb-2">Last 7 Days</h3>
+<div class="space-y-1">
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/50 px-4 py-2 transition-all duration-200 active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-body-md text-body-md truncate">Rust Performance Benchmarks</span>
+</div>
+</div>
+</section>
+</div>
+<div class="p-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-4 py-2 transition-all duration-200 active:scale-95 cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-4 py-2 transition-all duration-200 active:scale-95 cursor-pointer rounded-lg mt-1">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</div>
+</div>
+</aside>
+<!-- Main Chat Area -->
+<main class="flex-1 flex flex-col relative bg-surface-container-low overflow-hidden">
+<div class="flex-1 overflow-y-auto custom-scrollbar pt-8 pb-32 px-4 md:px-gutter">
+<div class="max-w-chat-max-width mx-auto space-y-stack-gap">
+<!-- Assistant Welcome -->
+<div class="flex flex-col items-start gap-3 w-full">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-6 h-6 rounded bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="bolt">bolt</span>
+</div>
+<span class="font-label-caps text-label-caps text-primary uppercase">Deep Intelligence Assistant</span>
+</div>
+<div class="glass-panel p-6 rounded-xl rounded-tl-none max-w-[90%] border-l-2 border-primary shadow-lg">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                            Good afternoon. I've analyzed the quantum simulation models you requested. Based on the current parameters, we're seeing a 15% improvement in coherence time using the new noise-injection algorithm. Would you like to review the specific benchmark results or adjust the simulation variables?
+                        </p>
+</div>
+</div>
+<!-- User Query -->
+<div class="flex flex-col items-end gap-3 w-full">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-caps text-label-caps text-secondary uppercase">You</span>
+</div>
+<div class="bg-surface-container-highest/40 p-6 rounded-xl rounded-tr-none max-w-[85%] border border-outline-variant/20 shadow-md">
+<p class="font-body-md text-body-md text-on-surface">
+                            Let's focus on the noise-injection algorithm. Can you show me the code snippet for the primary loop and explain how it handles phase decoherence at low temperatures?
+                        </p>
+</div>
+</div>
+<!-- Assistant Code Response -->
+<div class="flex flex-col items-start gap-3 w-full">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-6 h-6 rounded bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="bolt">bolt</span>
+</div>
+<span class="font-label-caps text-label-caps text-primary uppercase">Deep Intelligence Assistant</span>
+</div>
+<div class="glass-panel p-6 rounded-xl rounded-tl-none max-w-[95%] border-l-2 border-primary shadow-lg">
+<p class="font-body-md text-body-md text-on-surface mb-4">
+                            Certainly. The core logic utilizes a stochastic differential equation to model the phase shift. Here is the optimized Python implementation:
+                        </p>
+<div class="bg-surface-container-highest rounded-lg p-4 font-code-block text-code-block text-primary-fixed border border-outline-variant/30 mb-4 overflow-x-auto shadow-inner">
+<pre><code>def inject_noise(state, temp_k, dt):
+    # Calculate decoherence factor based on Kelvin
+    decoherence_rate = alpha * math.sqrt(temp_k)
+    phase_noise = np.random.normal(0, decoherence_rate * dt)
+    
+    # Apply phase shift transformation
+    return state * np.exp(1j * phase_noise)</code></pre>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+                            At temperatures below 10mK, the `decoherence_rate` effectively stabilizes, allowing the `phase_noise` term to remain within predictable variance bounds.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Prompt Input -->
+<div class="absolute bottom-0 left-0 right-0 p-gutter bg-gradient-to-t from-surface-container-low via-surface-container-low/95 to-transparent">
+<div class="max-w-chat-max-width mx-auto relative group">
+<div class="glass-panel rounded-2xl p-2 flex items-end gap-2 shadow-2xl transition-all duration-300 focus-within:border-primary/40 focus-within:shadow-primary/10">
+<button class="p-3 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 py-3 resize-none custom-scrollbar" placeholder="Type your prompt here..." rows="1"></textarea>
+<button class="p-3 bg-primary text-on-primary-container rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95 hover:bg-primary-container">
+<span class="material-symbols-outlined font-bold" data-icon="send">send</span>
+</button>
+</div>
+<div class="mt-2 flex justify-center gap-4">
+<span class="text-on-surface-variant/40 font-label-caps text-[10px] uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="verified">verified</span>
+                        GPT-4.0 Enterprise Powered
+                    </span>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Side Panel (Statistics) -->
+<aside class="w-sidebar-width h-full flex flex-col border-l border-outline-variant/30 bg-surface-container-lowest hidden xl:flex">
+<div class="p-6 border-b border-outline-variant/10">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-secondary" data-icon="analytics">analytics</span>
+<h2 class="font-headline-md text-[18px] font-bold text-primary">Token Usage</h2>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Active Research Session</p>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8">
+<!-- Input Tokens -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="input">input</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Input Tokens</span>
+</div>
+<span class="font-body-sm text-body-sm font-bold text-primary">1.2k</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 40%"></div>
+</div>
+</div>
+<!-- Output Tokens -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="output">output</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Output Tokens</span>
+</div>
+<span class="font-body-sm text-body-sm font-bold text-primary">3.5k</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 70%"></div>
+</div>
+</div>
+<!-- Total Cost -->
+<div class="space-y-4">
+<div class="glass-panel p-4 rounded-xl shadow-md bg-surface-container-high/30">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Session Cost</span>
+</div>
+<div class="text-[28px] font-bold text-primary">$0.12</div>
+<div class="mt-2 flex items-center gap-1 text-on-surface-variant/60 font-body-sm text-[12px]">
+<span class="material-symbols-outlined text-sm" data-icon="info">info</span>
+                        Est. based on current rates
+                    </div>
+</div>
+</div>
+<!-- Model Information -->
+<div class="space-y-3">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase border-b border-outline-variant/10 pb-1">Session Info</h3>
+<div class="flex justify-between py-1 border-b border-outline-variant/5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Active Model</span>
+<span class="font-body-sm text-body-sm font-bold text-secondary">GPT-4o</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Latency</span>
+<span class="font-body-sm text-body-sm font-bold text-secondary">24ms</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Context Window</span>
+<span class="font-body-sm text-body-sm font-bold text-secondary">128k</span>
+</div>
+</div>
+<!-- Visual Cue Graphic -->
+<div class="rounded-xl overflow-hidden relative h-32 mt-6 border border-outline-variant/10">
+<img alt="Analytics Graph" class="w-full h-full object-cover grayscale opacity-30" data-alt="A highly stylized, futuristic 3D visualization of data flows and neural nodes. The aesthetic is extremely minimalist with thin, glowing lines of indigo and violet connecting translucent white nodes in a vast dark void. The lighting is low-key and moody, focusing on the intricate geometric patterns that represent artificial intelligence processing and token consumption. The overall style is clean, clinical, and sophisticated, matching a high-end research dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDniVGGcovNna_5w5m0z6T4NPMx-s84-ShPQHr6296xhd7lTdfOxVyk5V_eJMyuxQRx2l0a33j9pJEycwWmyeNdZCqGaktxsiel7BRYsBhwARxnbp4YyBwBQxxd1ik5ge838V6ZqFRCbRUjN-pO9P1Gpf5c-HYwu7rUwLgM9xt2T-l8USn8KbhISXOuyjgv7sEbsFQytbvNrDkVwTCofFE3wSurgGEXIDGYAFjJJbFLqG9n-c1YkRub5P9QlLoXz19loGka5nNoE_c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+<div class="absolute bottom-2 left-3 flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+<span class="text-[10px] font-bold text-secondary uppercase">Live Processing</span>
+</div>
+</div>
+</div>
+<div class="p-6 mt-auto">
+<button class="w-full py-2 px-4 rounded-lg border border-outline-variant/30 text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-variant transition-all">
+                View Full Analytics
+            </button>
+</div>
+</aside>
+</div>
+</body></html>
