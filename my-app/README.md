@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Prototipo Base - Groq + Llama 3
 
-## Getting Started
+Proyecto base en Next.js con interfaz de chat, conexion segura a Groq y metricas de consumo por sesion.
 
-First, run the development server:
+## Requisitos implementados
+
+- Chat interactivo con envio de mensajes y respuesta del modelo.
+- Autenticacion segura con `GROQ_API_KEY` (solo en backend).
+- Integracion con modelo de Llama 3 en Groq.
+- Metricas de `usage` acumuladas por sesion:
+	- Prompt tokens
+	- Completion tokens
+	- Tokens totales
+- Metricas adicionales:
+	- Modelo activo
+	- Latencia
+	- Tokens por segundo
+- Persistencia del historial y metricas en `localStorage`.
+
+## Estructura de carpetas
+
+Se uso una organizacion base inspirada en el modelo de la imagen: por tipo + features.
+
+```text
+my-app/
+├── app/
+│   ├── api/chat/route.ts
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+└── src/
+		├── assets/
+		├── api/
+		│   └── chatApi.ts
+		├── configs/
+		├── components/
+		│   ├── chat/
+		│   └── common/
+		├── hooks/
+		│   └── chat/
+		├── lib/
+		├── services/
+		├── states/
+		└── utils/
+```
+
+## Configuracion
+
+1. Crear archivo `.env.local` en la raiz de `my-app`.
+2. Agregar la API key:
+
+```env
+GROQ_API_KEY=tu_api_key_aqui
+```
+
+## Ejecutar
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Abrir `http://localhost:3000`.

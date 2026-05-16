@@ -1,6 +1,6 @@
 export const requestWithAuthentication = async () => {
-  // Creo la url ficticia de un recurso protegido
-  let url = `https://webHost.com/api/protected`  
+
+  let url = `https://console.groq.com/dashboard/usage`  
 
   // Leo el valor de la API_KEY que guardé en el archivo .env
   let apiKey = import.meta.env.API_SECRET_KEY
