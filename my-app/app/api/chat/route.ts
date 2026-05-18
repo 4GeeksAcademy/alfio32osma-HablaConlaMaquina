@@ -58,7 +58,7 @@ export async function POST(request: Request) {
 
   const data = (await groqResponse.json()) as GroqApiResponse
   const latencyMs = Date.now() - startedAt
-  const usage = data.usage ?? { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 }
+  const usage = data.usage ?? { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 } // aqui realizamos la lectura de usage tras cada respuesta de Groq
   const tokensPerSecond = latencyMs > 0 ? usage.completion_tokens / (latencyMs / 1000) : 0
 
   return NextResponse.json({

@@ -7,8 +7,8 @@ interface UsagePanelProps {
   lastMetrics: SessionMetrics | null
 }
 
-export const UsagePanel = ({ usage, lastMetrics }: UsagePanelProps) => {
-  const total = Math.max(usage.totalTokens, 1)
+export const UsagePanel = ({ usage, lastMetrics }: UsagePanelProps) => { // Aqui mostramos el total combinado de tokens consumidos. 
+  const total = Math.max(usage.totalTokens, 1)                           // Además mostrmos métricas adicionales segun solicitado en los requisitos. 
   const promptProgress = (usage.promptTokens / total) * 100
   const completionProgress = (usage.completionTokens / total) * 100
 

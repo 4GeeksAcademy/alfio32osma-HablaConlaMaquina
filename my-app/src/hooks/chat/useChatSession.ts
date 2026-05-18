@@ -12,7 +12,14 @@ const initialUsage: Usage = {
 }
 
 const initialState: ChatState = {
-  messages: [],
+  messages: [
+    {
+      id: crypto.randomUUID(),
+      role: 'assistant',
+      content: '¡Hola! ¿En qué puedo ayudarte hoy?',
+      createdAt: Date.now()
+    }
+  ],
   usage: initialUsage,
   lastMetrics: null
 }
@@ -24,26 +31,32 @@ const buildMessage = (role: 'user' | 'assistant', content: string): ChatMessage 
   createdAt: Date.now()
 })
 
-export const useChatSession = () => {
+export const useChatSession = () => {     // Carganos, Guardamos el historial en localStorage. Además añadimos boton de borrar conversación reiniciando los mensajes y limpiando el localStorage.
   const [state, setState] = useState<ChatState>(initialState)
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
     const stored = getStoredChatState()
     if (stored) {
       setState(stored)
     }
+    setIsHydrated(true)
   }, [])
 
   useEffect(() => {
+    if (!isHydrated) {
+      return
+    }
+
     setStoredChatState(state)
-  }, [state])
+  }, [state, isHydrated])
 
   const totals = useMemo(() => state.usage, [state.usage])
 
-  const appendAssistant = (answer: string, usage: Usage, metrics: SessionMetrics) => {
+  const appendAssistant = (answer: string, usage: Usage, metrics: SessionMetrics) => { //aqui acumulamos el prompt de tokens enviados & recibidos en sesion... 
     const assistantMessage = buildMessage('assistant', answer)
 
     setState((prev) => ({

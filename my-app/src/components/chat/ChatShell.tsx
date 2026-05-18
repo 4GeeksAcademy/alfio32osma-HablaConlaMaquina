@@ -1,11 +1,14 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { ChatComposer } from '@/src/components/chat/ChatComposer'
 import { MessageList } from '@/src/components/chat/MessageList'
 import { UsagePanel } from '@/src/components/chat/UsagePanel'
 import { useChatSession } from '@/src/hooks/chat/useChatSession'
 
 export const ChatShell = () => {
+  const conversationScrollRef = useRef<HTMLDivElement | null>(null)
+
   const {
     messages,
     usage,
@@ -18,13 +21,38 @@ export const ChatShell = () => {
     resetSession
   } = useChatSession()
 
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1]
+    const shouldAutoscroll = isLoading || lastMessage?.role === 'assistant'
+
+    if (!shouldAutoscroll) {
+      return
+    }
+
+    const container = conversationScrollRef.current
+    if (!container) {
+      return
+    }
+
+    const rafId = requestAnimationFrame(() => {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: 'smooth'
+      })
+    })
+
+    return () => cancelAnimationFrame(rafId)
+  }, [messages, isLoading])
+
   return (
-    <div className="flex min-h-screen flex-col overflow-hidden bg-[#060e20] text-[#dae2fd]">
-      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-[#464554]/20 bg-[#060e20]/90 px-4 py-4 shadow-sm backdrop-blur md:px-6">
+    <div className="flex h-screen flex-col overflow-hidden bg-[#060e20] text-[#dae2fd]">
+      <header className="z-40 flex items-center justify-between border-b border-[#464554]/20 bg-[#060e20]/90 px-4 py-4 shadow-sm backdrop-blur md:px-6">
         <div className="flex items-center gap-4">
-          <h1 className="text-xl font-black tracking-tight text-[#c0c1ff]">Deep Intelligence</h1>
-          <div className="hidden h-6 w-px bg-[#464554]/30 md:block" />
-          <span className="hidden text-sm text-[#c7c4d7] md:block">Research Session</span>
+          <img src="/favicon.svg" alt="Logo Deep Intelligence" className="h-8 w-8 rounded-lg shadow-md" />
+          <div>
+            <h1 className="text-xl font-black tracking-tight text-[#c0c1ff] leading-tight">Deep Intelligence</h1>
+            <span className="block text-xs font-medium text-[#c7c4d7] md:text-sm">IA conversacional con métricas en tiempo real</span>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">
@@ -40,7 +68,7 @@ export const ChatShell = () => {
               type="button"
               className="border-b-2 border-[#c0c1ff] pb-1 font-semibold text-[#c0c1ff]"
             >
-              Clear Chat
+              Borrar conversación
             </button>
           </nav>
 
@@ -110,14 +138,14 @@ export const ChatShell = () => {
           </div>
         </aside>
 
-        <main className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-[#131b2e]">
-          <div className="custom-scrollbar flex-1 overflow-y-auto px-4 pb-36 pt-8 md:px-6">
+        <main className="flex min-h-0 flex-1 flex-col overflow-hidden bg-[#131b2e]">
+          <div ref={conversationScrollRef} className="custom-scrollbar flex-1 overflow-y-auto px-4 py-8 md:px-6">
             <div className="mx-auto flex w-full max-w-[820px] flex-col gap-3">
-              <MessageList messages={messages} />
+              <MessageList messages={messages} isLoading={isLoading} />
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#131b2e] via-[#131b2e]/95 to-transparent px-4 pb-5 pt-8 md:px-6">
+          <div className="border-t border-[#464554]/20 bg-gradient-to-t from-[#131b2e] via-[#131b2e]/95 to-[#131b2e]/85 px-4 pb-5 pt-4 md:px-6">
             <div className="mx-auto w-full max-w-[820px]">
               {error ? (
                 <p className="mb-3 rounded-lg border border-[#93000a]/80 bg-[#93000a]/30 px-3 py-2 text-sm text-[#ffdad6]">

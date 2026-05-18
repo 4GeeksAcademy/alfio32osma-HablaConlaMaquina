@@ -15,8 +15,12 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Habla con la Maquina",
-  description: "Prototipo de chat con Groq + Llama 3 y metricas de sesion",
+  title: "Deep Intelligence | Habla con la Máquina",
+  description:
+    "Deep Intelligence: IA conversacional con métricas en tiempo real. Prototipo Groq + Llama 3. Explora, mide y aprende con cada mensaje.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -31,8 +35,9 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="h-full overflow-hidden flex flex-col">{children}</body>
     </html>
   );
 }
